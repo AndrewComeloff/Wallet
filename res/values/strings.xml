@@ -1,0 +1,113 @@
+<resources>
+
+    <string name="app_name">Wallet</string>	
+
+	 <!-- Strings related to title activities -->
+    <string name="title_add_account">Счет</string>
+    <string name="description_account">Тут вы можете создать счет, на котором лежат ваши деньги. Например: счет в банке, кошелек, в левом носке под подушкой и т.п.</string>
+    <string name="title_add_fix_income">Источник дохода</string>
+    
+    <!-- Strings related to all content -->
+    <string name="category">Категория:</string>
+    <string name="title">название</string>
+    <string name="already_on_account">Уже на счету:</string>
+    <string name="amount">сумма</string>
+    <string name="currency">валюта</string>
+    <string name="amount_income">Размер дохода:</string>
+    <string name="account">Счет:</string>
+    <string name="how_often">Как часто:</string>
+    <string name="date_income">дата первой выплаты</string>
+    <string name="ok">oк</string>
+	<string name="cancle">отмена</string>
+	<string name="add">добавить</string>
+	<string name="skip">пропустить</string>
+    
+    <string-array name="category_account_arrays">
+        <item>Cash</item>
+        <item>Debit card</item>
+        <item>Bank Account</item>
+        <item>Deposit</item>
+        <item>Own account</item>
+    </string-array>
+    
+    <string-array name="category_income_arrays">
+        <item>Зарплата</item>
+        <item>Доходы от аренды</item>
+        <item>Дивиденды</item>
+        <item>Доход с депозита</item>
+        <item>Пенсия</item>
+        <item>Алименты</item>
+        <item>Пособие</item>
+        <item>Страховые выплаты</item>
+        <item>Разовые доходы</item>
+        <item>Свой доход</item>
+    </string-array>
+    
+    <string-array name="how_often">
+        <item>Ежедневно</item>
+        <item>По будням</item>
+        <item>По выходным</item>
+        <item>Еженедельно</item>
+        <item>Ежемесячно</item>
+        <item>Ежегодно</item>
+    </string-array>
+
+    <string-array name="currancy_arrays">
+        <item>Американский доллар</item>
+        <item>Евро</item>
+        <item>Белорусский рубль</item>
+        <item>Российский рубль</item>
+        <item>Украинская гривна</item>
+        <item>Австралийский доллар</item>
+        <item>Болгарский лев</item>
+        <item>Канадский доллар</item>
+        <item>Швейцарский франк</item>
+        <item>Китайский юань</item>
+        <item>Чешская крона</item>
+        <item>Датская крона</item>
+        <item>Британский фунт</item>
+        <item>Исландская крона</item>
+        <item>Японская иена</item>
+        <item>Киргизский сом</item>
+        <item>Кувейтский динар</item>
+        <item>Казахстанский тенге</item>
+        <item>Литовский лит</item>
+        <item>Латвийский лат</item>
+        <item>Молдавский лей</item>
+        <item>Норвежская крона</item>
+        <item>Злотый</item>
+        <item>Шведская крона</item>
+        <item>Сингапурский доллар</item>
+        <item>Турецкая лира</item>        
+    </string-array>
+    
+    <string-array name="code_currancy_arrays">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>BYR</item>
+        <item>RUS</item>
+        <item>UAH</item>
+        <item>AUD</item>
+        <item>BGN</item>
+        <item>CAD</item>
+        <item>CHF</item>
+        <item>CNY</item>
+        <item>CZK</item>
+        <item>DKK</item>
+        <item>GBP</item>
+        <item>ISK</item>
+        <item>JPY</item>
+        <item>KGS</item>
+        <item>KWD</item>
+        <item>KZT</item>
+        <item>LTL</item>
+        <item>LVL</item>
+        <item>MDL</item>
+        <item>NOK</item>
+        <item>PLN</item>
+        <item>SEK</item>
+        <item>SGD</item>
+        <item>TRY</item>        
+    </string-array>
+    
+</resources>
