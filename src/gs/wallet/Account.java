@@ -18,11 +18,11 @@ public class Account extends Activity {
 	EditText etTitle;
 	EditText etAlreadyOnAcc;
 	
-	String category, title, currancy, alreadyOnAcc;
+	String category, title;
 	
-	int currConst;
+	int currancy;
 	int[] arrCurrNum;
-	String[] arrCurrWord;
+//	String[] arrCurrWord;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +45,11 @@ public class Account extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 				category = spinCategory.getSelectedItem().toString();
-//				Toast.makeText(getBaseContext(),
-//						"Position = " + position + " " + str, Toast.LENGTH_SHORT)
-//						.show();
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 				Toast.makeText(getBaseContext(), "Nothing", Toast.LENGTH_SHORT)
 						.show();
 			}
@@ -72,64 +67,37 @@ public class Account extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
-				currancy = spinCurrancy.getSelectedItem().toString();
-//				Toast.makeText(getBaseContext(),
-//						"Position = " + position + " " + str, Toast.LENGTH_SHORT)
-//						.show();
+				currancy = position+1;
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> paramAdapterView) {
-				// TODO Auto-generated method stub
-				
 			}
 
 		});
 		
-		// fill the arrCurrNum of constants for DB 
-		Resources res = getResources();
-		arrCurrWord = res.getStringArray(R.array.currancy_arrays);
-		arrCurrNum = new int[arrCurrWord.length];
-		for (int i = 0; i < arrCurrWord.length; i++) {
-			arrCurrNum[i] = i+1;
-		}
-	}
 
-	public void clickAdd(View v) {
-		title = etTitle.getText().toString();
-		alreadyOnAcc = etAlreadyOnAcc.getText().toString();
-		
-		currConst = currFindConst(currancy);
-		
-		// open DB
-        DBOpenHelper dbHelper = new DBOpenHelper(this);
-        dbHelper.setAccount(category, title, alreadyOnAcc, currConst);
-        dbHelper.rawQuery(this);
-		
-		Toast.makeText(getBaseContext(),
-				"Currancy = " +currancy+currConst + "\n" + alreadyOnAcc, Toast.LENGTH_SHORT).show();
-		
-		Intent intent = new Intent(this, Income.class);
-	      startActivity(intent);
 	}
 	
-	public void clickSkip(View v) {
-//		DBOpenHelper dbHelper = new DBOpenHelper(this);
-//		dbHelper.rawQuery(this);
+public void clickSkip(View v) {
 		
         Intent intent = new Intent(this, Income.class);
 	      startActivity(intent);
 	}
-	
-	public int currFindConst(String curr){
-		int num = 0;
-		for (int i = 0; i < arrCurrWord.length; i++) {
-			if (arrCurrWord[i].equals(curr)) {
-				num = i+1;
-			}
-		}		
-		return num;		
-	}
-	
+
+	public void clickAdd(View v) {
+		title = etTitle.getText().toString();
+		float alreadyOnAcc = Float.parseFloat(etAlreadyOnAcc.getText().toString());
+		
+		// open DB
+        DBOpenHelper dbHelper = new DBOpenHelper(this);
+        dbHelper.setAccount(category, title, alreadyOnAcc, currancy);
+        dbHelper.rawQuery(this);
+		
+		Toast.makeText(getBaseContext(),
+				"Currancy = " +currancy + "\n" + alreadyOnAcc, Toast.LENGTH_SHORT).show();
+		
+		Intent intent = new Intent(this, Income.class);
+	      startActivity(intent);
+	}	
 }

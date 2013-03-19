@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/top_inc"
+            android:background="@drawable/top_exp"
             android:orientation="horizontal" >
 
             <ImageView
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:text="@string/title_add_fix_income"
+                android:text="@string/title_add_fix_expense"
                 android:textSize="24sp" />
 
         </LinearLayout>
@@ -102,7 +102,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/amount_income"
+                        android:text="@string/amount_expense"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <LinearLayout

@@ -15,17 +15,15 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@color/bg_gray4"
+            android:background="@drawable/top_acc"
             android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/imageView1"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="14dp"
+                android:padding="2dp"
                 android:src="@drawable/wallet_56_bw" />
 
             <TextView
@@ -33,16 +31,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="16dp"
                 android:text="@string/title_add_account"
                 android:textSize="24sp" />
+
         </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp"
-            android:layout_marginTop="12dp" >
+            android:layout_marginBottom="56dp" >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -154,16 +153,6 @@
         android:layout_height="8dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/view1"
-        android:src="@drawable/shadow_list" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/shadow_list2" />
+        android:background="@drawable/shadow_list" />
 
 </RelativeLayout>

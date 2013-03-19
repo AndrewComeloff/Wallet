@@ -15,6 +15,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	private static final String DB_NAME = "walletDB";
 	private static final int DB_VERSION = 1;
 	
+	private static final String STAT = "stat";
+	
 	public static final String TABLE_CURR = "currancy";
 	public static final String CURR_ID = "_id";
 	public static final String CURR_NAME = "name_curr";
@@ -30,12 +32,22 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	public static final String TABLE_INC = "income";
 	public static final String INC_ID = "_id";
 	public static final String INC_CATEGORY = "category";
+	public static final String INC_ICON = "icon";
 	public static final String INC_TITLE = "title";
 	public static final String INC_AMOUNT = "amount";
-	public static final String INC_CURRENCY = "currency_id";
 	public static final String INC_ACCOUNT = "account_id";
 	public static final String INC_HOW_OFTEN = "how_often";
 	public static final String INC_DATE = "date";
+	
+	public static final String TABLE_EXP = "expense";
+	public static final String EXP_ID = "_id";
+	public static final String EXP_CATEGORY = "category";
+	public static final String EXP_ICON = "icon";
+	public static final String EXP_TITLE = "title";
+	public static final String EXP_AMOUNT = "amount";
+	public static final String EXP_ACCOUNT = "account_id";
+	public static final String EXP_HOW_OFTEN = "how_often";
+	public static final String EXP_DATE = "date";
 	
 	final String LOG_TAG = "myLogs";
 	
@@ -64,20 +76,34 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				ACC_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				ACC_CATEGORY + " TEXT, " + 
 				ACC_TITLE + " TEXT, " + 
-				ACC_ALREADY + " TEXT, " + 
-				ACC_CURRENCY + " INTEGER NOT NULL ,FOREIGN KEY (" + 
-				ACC_CURRENCY + ") REFERENCES " +
-				TABLE_CURR + " (" + CURR_ID + "));");
+				ACC_ALREADY + " TEXT, " +
+				STAT + " INTEGER, " +
+				ACC_CURRENCY + " INTEGER)");
+//				ACC_CURRENCY + " INTEGER NOT NULL ,FOREIGN KEY (" + 
+//				ACC_CURRENCY + ") REFERENCES " +
+//				TABLE_CURR + " (" + CURR_ID + "));");
 		// DB Income
 		db.execSQL("CREATE TABLE "+ TABLE_INC + " (" +
 				INC_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-				INC_CATEGORY + " TEXT, " + 
+				INC_CATEGORY + " TEXT, " +
+				INC_ICON + " TEXT, " + 
 				INC_TITLE + " TEXT, " + 
 				INC_AMOUNT + " TEXT, " + 
 				INC_HOW_OFTEN + " TEXT, " +
-				INC_DATE + " TEXT, " +
-				INC_CURRENCY + " INTEGER, " +
+				INC_DATE + " TEXT, " +	
+				STAT + " INTEGER, " +
 				INC_ACCOUNT + " INTEGER)");
+		// DB Expense
+				db.execSQL("CREATE TABLE "+ TABLE_EXP + " (" +
+						EXP_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+						EXP_CATEGORY + " TEXT, " +
+						EXP_ICON + " TEXT, " + 
+						EXP_TITLE + " TEXT, " + 
+						EXP_AMOUNT + " TEXT, " + 
+						EXP_HOW_OFTEN + " TEXT, " +
+						EXP_DATE + " TEXT, " +	
+						STAT + " INTEGER, " +
+						EXP_ACCOUNT + " INTEGER)");
 		
 		ContentValues values = new ContentValues();
 		for (int i = 0; i < strArrCode.length; i++) {
@@ -104,14 +130,65 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	 * @param alreadyOnAccount
 	 * @param currConst
 	 */
-	public void setAccount(String category, String title, String alreadyOnAccount,	int currConst) {
+	public void setAccount(String category, String title, float alreadyOnAccount,	int currConst) {
 		openDB();
 		ContentValues values = new ContentValues();
 		values.put(ACC_CATEGORY, category);
 		values.put(ACC_TITLE, title);
 		values.put(ACC_ALREADY, alreadyOnAccount);
 		values.put(ACC_CURRENCY, currConst);
+		values.put(STAT, 1);
 		database.insert(TABLE_ACC, null, values);
+		database.close();
+	}
+	
+	/**
+	 * Add income with parameters to the database
+	 * @param category
+	 * @param title
+	 * @param amount 
+	 * @param account Number of account
+	 * @param howOften Index from array
+	 * @param date 
+	 */
+	public void setIncome(String category, String icon, String title, 
+			Float amount, int account_id, int howOften, String date) {
+		openDB();
+		ContentValues values = new ContentValues();
+		values.put(INC_CATEGORY, category);
+		values.put(INC_ICON, icon);
+		values.put(INC_TITLE, title);
+		values.put(INC_AMOUNT, amount);
+		values.put(INC_ACCOUNT, account_id);
+		values.put(INC_HOW_OFTEN, howOften);
+		values.put(INC_DATE, date);
+		values.put(STAT, 1);
+		database.insert(TABLE_INC, null, values);
+		database.close();
+	}
+	
+	/**
+	 * Add expense with parameters to the database
+	 * @param category
+	 * @param title
+	 * @param amount 
+	 * @param account Number of account
+	 * @param howOften Index from array
+	 * @param date 
+	 */
+	public void setExpense(String category, String icon, String title, 
+			Float amount, int account_id, int howOften, String date) {
+		openDB();
+		ContentValues values = new ContentValues();
+		values.put(EXP_CATEGORY, category);
+		values.put(EXP_ICON, icon);
+		values.put(EXP_TITLE, title);
+		values.put(EXP_AMOUNT, amount);
+		values.put(EXP_ACCOUNT, account_id);
+		values.put(EXP_HOW_OFTEN, howOften);
+		values.put(EXP_DATE, date);
+		values.put(STAT, 1);
+		database.insert(TABLE_EXP, null, values);
 		database.close();
 	}
 	
@@ -159,33 +236,60 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //		return null;
 	}
 	
-	public String[] selectColumn(Context ctx) {
+	/**
+	 * Get column with all rows from table
+	 * @param context
+	 * @param table 
+	 * @param column
+	 * @return String array
+	 */
+	public String[] selectColumn(Context context, String table, String column) {
         openDB();
-		final String MY_QUERY = "SELECT " + ACC_TITLE + " FROM " + TABLE_ACC ;
+		final String MY_QUERY = "SELECT " + column + " FROM " + table + " WHERE " + STAT + " = 1" ;
 		Cursor accCursor = database.rawQuery(MY_QUERY, null);
-		String[] arrAccount = new String[accCursor.getCount()];
+		String[] array = new String[accCursor.getCount()];
 		if (accCursor.moveToFirst()) {
 
-			// определ€ем номера столбцов по имени в выборке
-			int titleColIndex = accCursor.getColumnIndex(ACC_TITLE);
+			int titleColIndex = accCursor.getColumnIndex(column);
 			
 			int i = 0;
 			do {
-				arrAccount[i++] =  accCursor.getString(titleColIndex);
-				// получаем значени€ по номерам столбцов и пишем все в лог
-//				Toast.makeText(ctx, "titleCount = " + titleCount + " titleColumnCount = " 
-//				+ titleColumnCount + " titleColIndex = " + titleColIndex
-//						, Toast.LENGTH_SHORT).show();
-				// переход на следующую строку
-				// а если следующей нет (текуща€ - последн€€), то false -
-				// выходим из цикла
+				array[i++] =  accCursor.getString(titleColIndex);
 			} while (accCursor.moveToNext());
 		} else
 			Log.d(LOG_TAG, "0 rows");
 		accCursor.close();
 		database.close();
 
-		return arrAccount;
+		return array;
+	}
+	
+	/**
+	 * Get cell from table
+	 * @param context
+	 * @param table Name of table (constant)
+	 * @param column column from get information (constant)
+	 * @param _id column id(constant)
+	 * @param position from column _id
+	 * @return String
+	 */
+	public String selectCell(Context context, String table, String column, 
+			String _id, int position) {		
+        openDB();
+        
+		final String MY_QUERY = "SELECT " + column + " FROM " + table 
+				+ " WHERE " + _id + " = " + position ;
+		Cursor accCursor = database.rawQuery(MY_QUERY, null);
+		String str = null;
+		if (accCursor.moveToFirst()) {
+			int titleColIndex = accCursor.getColumnIndex(column);
+			str =  accCursor.getString(titleColIndex);			
+		} else
+			Log.d(LOG_TAG, "0 rows");
+		accCursor.close();
+		database.close();
+
+		return str;
 	}
 	
 	private void openDB() {
@@ -196,6 +300,18 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 			throw new Error("The end");
 		}
 	}
+	
+//	public boolean isTableExist(String tableName){ 
+//        Cursor cur = null; 
+//        try{ 
+//            cur = database.rawQuery("SELECT * FROM " + tableName + " WHERE 1=0", null ); 
+//            return true; 
+//        }catch(Exception ex){ 
+//            return false; 
+//        }finally{ 
+//            if (cur != null) cur.close(); 
+//        } 
+//    } 
 	
 	public int deleteDB(){
 		openDB();

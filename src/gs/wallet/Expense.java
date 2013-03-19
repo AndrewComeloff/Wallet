@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Income extends FragmentActivity implements DatePickerDialogFragment.NoticeDialogListener {
+public class Expense extends FragmentActivity implements DatePickerDialogFragment.NoticeDialogListener {
 
 	Spinner spinCategory, spinAcount, spinHowOften;
 	EditText etTitle, etAmountIncome, etCurrency, etDate;
@@ -36,7 +36,7 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fix_income);
+		setContentView(R.layout.fix_expense);
 
 		spinCategory = (Spinner) findViewById(R.id.spinCategoryIncome);
 		spinAcount = (Spinner) findViewById(R.id.spinAccount);
@@ -68,7 +68,7 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 
 		// -- spin Category --
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.category_income_arrays,
+				this, R.array.category_expense_arrays,
 				android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -103,7 +103,7 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long id) {
 				// Get array with acc_id
-				String[] arrAccountID = dbHelper.selectColumn(Income.this,
+				String[] arrAccountID = dbHelper.selectColumn(Expense.this,
 						DBOpenHelper.TABLE_ACC, DBOpenHelper.ACC_ID);				
 				
 				if (arrAccountID.length > 0) {
@@ -111,11 +111,11 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 					acountID = Integer.parseInt(arrAccountID[position]);
 					// Get currancy ID from selected account
 					currancyID = Integer.parseInt(dbHelper.selectCell(
-							Income.this, DBOpenHelper.TABLE_ACC,
+							Expense.this, DBOpenHelper.TABLE_ACC,
 							DBOpenHelper.ACC_CURRENCY, DBOpenHelper.ACC_ID,
 							acountID));
 					// Set currancy
-					etCurrency.setText(dbHelper.selectCell(Income.this,
+					etCurrency.setText(dbHelper.selectCell(Expense.this,
 							DBOpenHelper.TABLE_CURR, DBOpenHelper.CURR_NAME,
 							DBOpenHelper.CURR_ID, currancyID));
 				} 
@@ -182,7 +182,7 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 	}
 	public void clickDate(View v) {				
 		DatePickerDialogFragment dlg = new DatePickerDialogFragment();
-		dlg.setNoticeDialogListener(Income.this);
+		dlg.setNoticeDialogListener(Expense.this);
 		dlg.setDate(year, month, day);
 		dlg.show(getSupportFragmentManager(),
 				"DatePickerDialogFragment");		
@@ -212,17 +212,14 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 	}
 	
 	public void clickSkip(View v) {
-//		DBOpenHelper dbHelper = new DBOpenHelper(this);
-//		dbHelper.rawQuery(this);
+		DBOpenHelper dbHelper = new DBOpenHelper(this);
+		dbHelper.rawQuery(this);
 		
 		// втавляем картинку по имени файла
-//		String st = "icon_01";
-//		Resources res = getResources();
-//		int resID = res.getIdentifier(st , "drawable", getPackageName());
-//		ivIcons.setImageResource(resID);
-		
-		Intent intent = new Intent(this, Expense.class);
-	    startActivity(intent);
+		String st = "icon_01";
+		Resources res = getResources();
+		int resID = res.getIdentifier(st , "drawable", getPackageName());
+		ivIcons.setImageResource(resID);
 	}
 	
 	public void clickAdd(View v) {
@@ -230,9 +227,10 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 		float amount = Float.parseFloat(etAmountIncome.getText().toString());
 
 		DBOpenHelper dbHelper = new DBOpenHelper(this);
-		dbHelper.setIncome(category, imageName, title, amount, acountID, howOften, (pad(day) + "." + pad(month + 1) + "." + year));
+		dbHelper.setExpense(category, imageName, title, amount, acountID, howOften, (pad(day) + "." + pad(month + 1) + "." + year));
 		
-		Intent intent = new Intent(this, Expense.class);
-	    startActivity(intent);
+//		Intent intent = new Intent(this, Expense.class);
+//	    startActivity(intent);
+
 	}
 }

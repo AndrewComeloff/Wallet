@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray1"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_01"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_01"
+                    android:src="@drawable/icon_01" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_02"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_02"
+                    android:src="@drawable/icon_02" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_03"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_03"
+                    android:src="@drawable/icon_03" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_04"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_04"
+                    android:src="@drawable/icon_04" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_05"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_05"
+                    android:src="@drawable/icon_05" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_06"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_06"
+                    android:src="@drawable/icon_06" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_07"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_07"
+                    android:src="@drawable/icon_07" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_08"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_08"
+                    android:src="@drawable/icon_08" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_09"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_09"
+                    android:src="@drawable/icon_09" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_10"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_10"
+                    android:src="@drawable/icon_10" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_11"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_11"
+                    android:src="@drawable/icon_11" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_12"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_12"
+                    android:src="@drawable/icon_12" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_13"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_13"
+                    android:src="@drawable/icon_13" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_14"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_14"
+                    android:src="@drawable/icon_14" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_15"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_15"
+                    android:src="@drawable/icon_15" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_16"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_16"
+                    android:src="@drawable/icon_16" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_17"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_17"
+                    android:src="@drawable/icon_17" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_18"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_18"
+                    android:src="@drawable/icon_18" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_19"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_19"
+                    android:src="@drawable/icon_19" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_20"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_20"
+                    android:src="@drawable/icon_20" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_21"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_21"
+                    android:src="@drawable/icon_21" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_22"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_22"
+                    android:src="@drawable/icon_22" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_23"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_23"
+                    android:src="@drawable/icon_23" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_24"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_24"
+                    android:src="@drawable/icon_24" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_25"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_25"
+                    android:src="@drawable/icon_25" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_26"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_26"
+                    android:src="@drawable/icon_26" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_27"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_27"
+                    android:src="@drawable/icon_27" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_28"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_28"
+                    android:src="@drawable/icon_28" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_29"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_29"
+                    android:src="@drawable/icon_29" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_30"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_30"
+                    android:src="@drawable/icon_30" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_31"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_31"
+                    android:src="@drawable/icon_31" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_32"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_32"
+                    android:src="@drawable/icon_32" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_33"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_33"
+                    android:src="@drawable/icon_33" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_34"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_34"
+                    android:src="@drawable/icon_34" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_35"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_35"
+                    android:src="@drawable/icon_35" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_36"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_36"
+                    android:src="@drawable/icon_36" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_37"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_37"
+                    android:src="@drawable/icon_37" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_38"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_38"
+                    android:src="@drawable/icon_38" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_39"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_39"
+                    android:src="@drawable/icon_39" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_40"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_40"
+                    android:src="@drawable/icon_40" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_41"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_41"
+                    android:src="@drawable/icon_41" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_42"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_42"
+                    android:src="@drawable/icon_42" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_43"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_43"
+                    android:src="@drawable/icon_43" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_44"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_44"
+                    android:src="@drawable/icon_44" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_45"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_45"
+                    android:src="@drawable/icon_45" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_46"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_46"
+                    android:src="@drawable/icon_46" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_47"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_47"
+                    android:src="@drawable/icon_47" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_48"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_48"
+                    android:src="@drawable/icon_48" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_49"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_49"
+                    android:src="@drawable/icon_49" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_50"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_50"
+                    android:src="@drawable/icon_50" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_51"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_51"
+                    android:src="@drawable/icon_51" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_52"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_52"
+                    android:src="@drawable/icon_52" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_53"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_53"
+                    android:src="@drawable/icon_53" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_54"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_54"
+                    android:src="@drawable/icon_54" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/ivIcon_55"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_55"
+                    android:src="@drawable/icon_55" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_56"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_56"
+                    android:src="@drawable/icon_56" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_57"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_57"
+                    android:src="@drawable/icon_57" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_58"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_58"
+                    android:src="@drawable/icon_58" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_59"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_59"
+                    android:src="@drawable/icon_59" />
+
+                <ImageView
+                    android:id="@+id/ivIcon_60"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_primary_selector"
+                    android:onClick="clickIconsDialog"
+                    android:padding="5dp"
+                    android:tag="icon_60"
+                    android:src="@drawable/icon_60" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</ScrollView>

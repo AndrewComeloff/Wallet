@@ -6,6 +6,7 @@
     <string name="title_add_account">Счет</string>
     <string name="description_account">Тут вы можете создать счет, на котором лежат ваши деньги. Например: счет в банке, кошелек, в левом носке под подушкой и т.п.</string>
     <string name="title_add_fix_income">Источник дохода</string>
+    <string name="title_add_fix_expense">Источник расхода</string>
     
     <!-- Strings related to all content -->
     <string name="category">Категория:</string>
@@ -14,13 +15,16 @@
     <string name="amount">сумма</string>
     <string name="currency">валюта</string>
     <string name="amount_income">Размер дохода:</string>
+    <string name="amount_expense">Размер расхода:</string>
     <string name="account">Счет:</string>
     <string name="how_often">Как часто:</string>
-    <string name="date_income">дата первой выплаты</string>
+    <string name="date_income">дата выплаты</string>
     <string name="ok">oк</string>
 	<string name="cancle">отмена</string>
 	<string name="add">добавить</string>
 	<string name="skip">пропустить</string>
+	<string name="choise_icon">Выберите иконку</string>
+	<string name="add_account">добавьте счет</string>
     
     <string-array name="category_account_arrays">
         <item>Cash</item>
@@ -41,6 +45,25 @@
         <item>Страховые выплаты</item>
         <item>Разовые доходы</item>
         <item>Свой доход</item>
+    </string-array>
+    
+    <string-array name="category_expense_arrays">
+        <item>Коммунальные платежи</item>
+        <item>Телекоммуникации</item>
+        <item>Телевиденье</item>
+        <item>Охранные услуги</item>
+        <item>Аренда</item>
+        <item>Образование</item>
+        <item>Расходы на персонал</item>
+        <item>Оздоровительные услуги</item>
+        <item>Медецинские услуги</item>
+        <item>Финансовые услуги</item>
+        <item>Платежи в бюджет</item>
+        <item>Расходы на питание</item>
+        <item>Расходы на развлечение</item>
+        <item>Расходы на автомобиль</item>
+        <item>Расходы на одежду</item>
+        <item>Другие расходы</item>
     </string-array>
     
     <string-array name="how_often">
