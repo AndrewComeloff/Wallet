@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.Html;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
@@ -206,9 +207,10 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 		// get day of week
 		Calendar cal = Calendar.getInstance();		
 		cal.set(year, month, day);		
-		String dayOfWeek = DateFormat.format("EE", cal).toString();
-		
-		etDate.setText(dayOfWeek + ", " + pad(day) + "." + pad(month + 1) + "." + year);
+		String dayOfWeek = DateFormat.format("EEEE", cal).toString();
+		String strMonth = DateFormat.format("MMMM", cal).toString();
+
+		etDate.setText(dayOfWeek + ", " + pad(day) + " " + strMonth + " " + year);
 	}
 	
 	public void clickSkip(View v) {

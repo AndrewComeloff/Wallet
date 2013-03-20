@@ -206,9 +206,10 @@ public class Expense extends FragmentActivity implements DatePickerDialogFragmen
 		// get day of week
 		Calendar cal = Calendar.getInstance();		
 		cal.set(year, month, day);		
-		String dayOfWeek = DateFormat.format("EE", cal).toString();
-		
-		etDate.setText(dayOfWeek + ", " + pad(day) + "." + pad(month + 1) + "." + year);
+		String dayOfWeek = DateFormat.format("EEEE", cal).toString();
+		String strMonth = DateFormat.format("MMMM", cal).toString();
+
+		etDate.setText(dayOfWeek + ", " + pad(day) + " " + strMonth + " " + year);
 	}
 	
 	public void clickSkip(View v) {
