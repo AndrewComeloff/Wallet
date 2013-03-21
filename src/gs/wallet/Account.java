@@ -22,7 +22,7 @@ public class Account extends FragmentActivity implements CategoryDialogFragment.
 	
 	int currancy;
 	int[] arrCurrNum;
-	String[] arrCategory;
+	String[] arrCategory = new String[]{"cash", "Add Category"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -146,16 +146,20 @@ public class Account extends FragmentActivity implements CategoryDialogFragment.
 
 	@Override
 	public void onDialogPositiveClick(DialogFragment dialog) {
+		
 //		LayoutInflater inflater = getLayoutInflater();
 //		View v = inflater.inflate(R.layout.dlg_category, null);
 // 	   	etCategory = (EditText)v.findViewById(R.id.etCategory);
 //		category = etCategory.getText().toString();
 		
-		String[] array = new String[arrCategory.length+1]; 
-		array = arrCategory.clone();
-		array[array.length]=category;
-		Toast.makeText(getBaseContext(), "press OK", Toast.LENGTH_SHORT).show();
+//		String[] array = new String[arrCategory.length+1]; 
+//		array = arrCategory.clone();
+//		array[array.length]=category;
+//		Toast.makeText(getBaseContext(), "press OK", Toast.LENGTH_SHORT).show();
 	}
-
+	
+	public void onUserSelectValue(String selectedValue) {
+		category = selectedValue;
+    }
 		
 }
