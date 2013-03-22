@@ -1,5 +1,6 @@
 package gs.wallet;
 
+import gs.wallet.CategoryDialogFragment.NoticeDialogListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Account extends FragmentActivity implements CategoryDialogFragment.NoticeDialogListener{
+public class Account extends FragmentActivity implements NoticeDialogListener {
 	
 	Spinner spinCategory, spinCurrancy;
 	EditText etCategory, etTitle, etAlreadyOnAcc;
@@ -86,7 +87,6 @@ public class Account extends FragmentActivity implements CategoryDialogFragment.
 			@Override
 			public void onNothingSelected(AdapterView<?> paramAdapterView) {
 			}
-
 		});
 		
 
@@ -147,19 +147,20 @@ public class Account extends FragmentActivity implements CategoryDialogFragment.
 	@Override
 	public void onDialogPositiveClick(DialogFragment dialog) {
 		
-//		LayoutInflater inflater = getLayoutInflater();
-//		View v = inflater.inflate(R.layout.dlg_category, null);
-// 	   	etCategory = (EditText)v.findViewById(R.id.etCategory);
-//		category = etCategory.getText().toString();
+		LayoutInflater inflater = getLayoutInflater();
+		View v = inflater.inflate(R.layout.dlg_category, null);
+ 	   	etCategory = (EditText)v.findViewById(R.id.etCategory);
+		category = etCategory.getText().toString();
 		
 //		String[] array = new String[arrCategory.length+1]; 
 //		array = arrCategory.clone();
 //		array[array.length]=category;
-//		Toast.makeText(getBaseContext(), "press OK", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getBaseContext(), "press ADD - " + category, Toast.LENGTH_SHORT).show();
 	}
 	
-	public void onUserSelectValue(String selectedValue) {
-		category = selectedValue;
-    }
+//	public void onUserSelectValue(String selectedValue) {
+//		category = selectedValue;
+//		Toast.makeText(getBaseContext(), category, Toast.LENGTH_SHORT).show();
+//    }
 		
 }

@@ -70,8 +70,8 @@ public class Dialogs extends DialogFragment {
 		Dialog dialog;
 		Builder builder = new Builder(context);
 		
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-	    final View v = inflater.inflate(R.layout.dlg_category, null);
+//		LayoutInflater inflater = getActivity().getLayoutInflater();
+//	    final View v = inflater.inflate(R.layout.dlg_category, null);
 		return null;
 	}
 

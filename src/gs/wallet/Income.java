@@ -168,8 +168,6 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 	public void clickIconsDialog(View v) {
 		setIcon(v.getId());
 		imageName = (String) v.getTag();
-//		String imageName = (String) ivIcons.getTag();
-//		int intImageName = ivIcons.getResources();
 		Toast.makeText(this, "image name = " + imageName, Toast.LENGTH_SHORT).show();
 	}
 	
@@ -177,10 +175,10 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 		final int ID_IMAGE = R.drawable.icon_01;
 		final int ID_VIEW = R.id.ivIcon_01;
 		int idImage = getId - ID_VIEW;
-		ivIcons.setImageResource(ID_IMAGE + idImage);
-		
+		ivIcons.setImageResource(ID_IMAGE + idImage);		
 		dlg.dismiss();
 	}
+	
 	public void clickDate(View v) {				
 		DatePickerDialogFragment dlg = new DatePickerDialogFragment();
 		dlg.setNoticeDialogListener(Income.this);
@@ -188,7 +186,6 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 		dlg.show(getSupportFragmentManager(),
 				"DatePickerDialogFragment");		
 	}
-
 	
 	// add 0 before ten-digit number 
 	private static String pad(int c) {
