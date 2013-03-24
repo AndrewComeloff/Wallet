@@ -104,7 +104,7 @@ public class Expense extends FragmentActivity implements DatePickerDialogFragmen
 					int position, long id) {
 				// Get array with acc_id
 				String[] arrAccountID = dbHelper.selectColumn(Expense.this,
-						DBOpenHelper.TABLE_ACC, DBOpenHelper.ACC_ID);				
+						DBOpenHelper.TABLE_ACC, DBOpenHelper.ID);				
 				
 				if (arrAccountID.length > 0) {
 					// Get account ID from selected position
@@ -112,12 +112,12 @@ public class Expense extends FragmentActivity implements DatePickerDialogFragmen
 					// Get currancy ID from selected account
 					currancyID = Integer.parseInt(dbHelper.selectCell(
 							Expense.this, DBOpenHelper.TABLE_ACC,
-							DBOpenHelper.ACC_CURRENCY, DBOpenHelper.ACC_ID,
+							DBOpenHelper.ACC_CURRENCY, DBOpenHelper.ID,
 							acountID));
 					// Set currancy
 					etCurrency.setText(dbHelper.selectCell(Expense.this,
 							DBOpenHelper.TABLE_CURR, DBOpenHelper.CURR_NAME,
-							DBOpenHelper.CURR_ID, currancyID));
+							DBOpenHelper.ID, currancyID));
 				} 
 				
 				Toast.makeText(getBaseContext(), "Acount = " + acountID,

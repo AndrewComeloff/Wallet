@@ -1,11 +1,9 @@
 package gs.wallet;
 
-import gs.wallet.CategoryDialogFragment.NoticeDialogListener;
+import gs.wallet.CategoryDialogFragment.DialogListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -14,16 +12,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Account extends FragmentActivity implements NoticeDialogListener {
+public class Account extends FragmentActivity implements DialogListener {
 	
 	Spinner spinCategory, spinCurrancy;
-	EditText etCategory, etTitle, etAlreadyOnAcc;
+	EditText etTitle, etAlreadyOnAcc;
 	
 	String category, title;
 	
 	int currancy;
 	int[] arrCurrNum;
-	String[] arrCategory = new String[]{"cash", "Add Category"};
+	String[] arrCategory;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +30,14 @@ public class Account extends FragmentActivity implements NoticeDialogListener {
 
 		spinCategory = (Spinner) findViewById(R.id.spinCategoryAccount);
 		spinCurrancy = (Spinner) findViewById(R.id.spinCurrencyAccount);
-//		etCategory = (EditText)findViewById(R.id.etCategory);
 		etTitle = (EditText)findViewById(R.id.etTitleAccount);
 		etAlreadyOnAcc = (EditText)findViewById(R.id.etAlreadyOnAccount);
 		
-		if (arrCategory != null) {
-			spinCategory(arrCategory);
-			Toast.makeText(getBaseContext(), "array not null" , Toast.LENGTH_SHORT).show();
-		} else {
-			arrCategory = new String[1];
-			arrCategory[0]="Add Category";
-			spinCategory(arrCategory);
-			Toast.makeText(getBaseContext(), "array null" , Toast.LENGTH_SHORT).show();
-		}
+		// get category of accounts from DB
+		final DBOpenHelper dbHelper = new DBOpenHelper(this);
+		arrCategory = dbHelper.selectColumn(this, DBOpenHelper.TABLE_CAT_ACC, DBOpenHelper.CAT_ACC_NAME);	
+		
+		spinCategory(arrCategory);
 		
 
 //		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -88,11 +81,14 @@ public class Account extends FragmentActivity implements NoticeDialogListener {
 			public void onNothingSelected(AdapterView<?> paramAdapterView) {
 			}
 		});
-		
-
 	}
 	
 	private void spinCategory(String[] array) {
+		if (array == null) {
+			array = new String[1];
+			array[0]="Add Category";
+			arrCategory = array.clone();
+		} 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, array);
 		
@@ -116,18 +112,31 @@ public class Account extends FragmentActivity implements NoticeDialogListener {
 		});
 	}
 
+	CategoryDialogFragment dlg = new CategoryDialogFragment();
 	public void dlgCategory(int position){
-		if (arrCategory.length == position+1) {
-			CategoryDialogFragment dlg = new CategoryDialogFragment();
+		if (arrCategory.length == position+1) {			
 		    dlg.show(getSupportFragmentManager(), "CategoryDialogFragment");
 		}		
 	}
+	
+	public void clickDlgAdd(View v) {
+		category = dlg.getCategory();
+//		String[] array = new String[arrCategory.length+1]; 
+//		array = arrCategory.clone();
+//		array[array.length]=category;
+		
+		Toast.makeText(getBaseContext(), "press ADD - " + category, Toast.LENGTH_SHORT).show();
+		dlg.dismiss();
+	}
+	public void clickDlgCancel(View v) {		
+		Toast.makeText(getBaseContext(), "press Cancel - " + category, Toast.LENGTH_SHORT).show();
+		dlg.dismiss();
+	}	
 	
 	public void clickSkip(View v) {		
         Intent intent = new Intent(this, Income.class);
 	      startActivity(intent);
 	}
-
 	public void clickAdd(View v) {
 		title = etTitle.getText().toString();
 		float alreadyOnAcc = Float.parseFloat(etAlreadyOnAcc.getText().toString());
@@ -142,25 +151,5 @@ public class Account extends FragmentActivity implements NoticeDialogListener {
 		
 		Intent intent = new Intent(this, Income.class);
 	      startActivity(intent);
-	}
-
-	@Override
-	public void onDialogPositiveClick(DialogFragment dialog) {
-		
-		LayoutInflater inflater = getLayoutInflater();
-		View v = inflater.inflate(R.layout.dlg_category, null);
- 	   	etCategory = (EditText)v.findViewById(R.id.etCategory);
-		category = etCategory.getText().toString();
-		
-//		String[] array = new String[arrCategory.length+1]; 
-//		array = arrCategory.clone();
-//		array[array.length]=category;
-		Toast.makeText(getBaseContext(), "press ADD - " + category, Toast.LENGTH_SHORT).show();
-	}
-	
-//	public void onUserSelectValue(String selectedValue) {
-//		category = selectedValue;
-//		Toast.makeText(getBaseContext(), category, Toast.LENGTH_SHORT).show();
-//    }
-		
+	}		
 }

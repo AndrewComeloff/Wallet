@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Account"></activity>
-        <activity android:name="Income"></activity>
-        <activity android:name="Expense"></activity>
+        <activity android:name="Account" android:windowSoftInputMode="stateAlwaysHidden"></activity>"
+        <activity android:name="Income" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name="Expense" android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

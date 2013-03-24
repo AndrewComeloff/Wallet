@@ -17,20 +17,28 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	
 	private static final String STAT = "stat";
 	
-	public static final String TABLE_CURR = "currancy";
-	public static final String CURR_ID = "_id";
-	public static final String CURR_NAME = "name_curr";
-	public static final String CURR_RATE = "rate_curr";
+	public static final String ID = "_id";
+	
+	public static final String TABLE_CURR = "currancy";	
+	public static final String CURR_NAME = "name";
+	public static final String CURR_RATE = "rate";
+	
+	public static final String TABLE_CAT_ACC = "category_account";	
+	public static final String CAT_ACC_NAME = "name";
+	
+	public static final String TABLE_CAT_INC = "category_income";	
+	public static final String CAT_INC_NAME = "name";
+	
+	public static final String TABLE_CAT_EXP = "category_expense";
+	public static final String CAT_EXP_NAME = "name";
 	
 	public static final String TABLE_ACC = "account";
-	public static final String ACC_ID = "_id";
 	public static final String ACC_CATEGORY = "category";
 	public static final String ACC_TITLE = "title";
 	public static final String ACC_ALREADY = "amount";
 	public static final String ACC_CURRENCY = "currency_id";
 	
 	public static final String TABLE_INC = "income";
-	public static final String INC_ID = "_id";
 	public static final String INC_CATEGORY = "category";
 	public static final String INC_ICON = "icon";
 	public static final String INC_TITLE = "title";
@@ -40,7 +48,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	public static final String INC_DATE = "date";
 	
 	public static final String TABLE_EXP = "expense";
-	public static final String EXP_ID = "_id";
 	public static final String EXP_CATEGORY = "category";
 	public static final String EXP_ICON = "icon";
 	public static final String EXP_TITLE = "title";
@@ -53,27 +60,43 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	
 	private SQLiteDatabase database;
 
-	String[] strArrCode;
+	String[] strArrCode, strArrCatAcc, strArrCatInc, strArrCatExp;
 	
 	public DBOpenHelper(Context context) {		
 		super(context, DB_NAME, null, DB_VERSION);
 //		this.context = context;
 		Resources res = context.getResources();
 		strArrCode = res.getStringArray(R.array.code_currancy_arrays);
+		strArrCatAcc = res.getStringArray(R.array.category_account_arrays);
+		strArrCatInc = res.getStringArray(R.array.category_income_arrays);
+		strArrCatExp = res.getStringArray(R.array.category_expense_arrays);
 	}
 	
-
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {		
-		// DB Currancy
+		// table Currancy
 		db.execSQL("CREATE TABLE " + TABLE_CURR + " (" +
-		        CURR_ID + " INTEGER PRIMARY KEY , " +
+		        ID + " INTEGER PRIMARY KEY , " +
 		        CURR_NAME + " TEXT, " +
 		        CURR_RATE + " FLOAT)");
-		// DB Account
+		// table Category Account
+		db.execSQL("CREATE TABLE " + TABLE_CAT_ACC + " (" +
+		        ID + " INTEGER PRIMARY KEY , " +
+		        CAT_ACC_NAME + " TEXT, " +
+		        STAT + " INTEGER)");
+		// table Category Income
+		db.execSQL("CREATE TABLE " + TABLE_CAT_INC + " (" +
+		        ID + " INTEGER PRIMARY KEY , " +
+		        CAT_INC_NAME + " TEXT, " +
+		        STAT + " INTEGER)");
+		// table Category Expense
+		db.execSQL("CREATE TABLE " + TABLE_CAT_EXP + " (" +
+		        ID + " INTEGER PRIMARY KEY , " +
+		        CAT_EXP_NAME + " TEXT, " +
+		        STAT + " INTEGER)");
+		// table Account
 		db.execSQL("CREATE TABLE "+ TABLE_ACC + " (" +
-				ACC_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+				ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				ACC_CATEGORY + " TEXT, " + 
 				ACC_TITLE + " TEXT, " + 
 				ACC_ALREADY + " TEXT, " +
@@ -82,9 +105,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //				ACC_CURRENCY + " INTEGER NOT NULL ,FOREIGN KEY (" + 
 //				ACC_CURRENCY + ") REFERENCES " +
 //				TABLE_CURR + " (" + CURR_ID + "));");
-		// DB Income
+		// table Income
 		db.execSQL("CREATE TABLE "+ TABLE_INC + " (" +
-				INC_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+				ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				INC_CATEGORY + " TEXT, " +
 				INC_ICON + " TEXT, " + 
 				INC_TITLE + " TEXT, " + 
@@ -93,29 +116,44 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				INC_DATE + " TEXT, " +	
 				STAT + " INTEGER, " +
 				INC_ACCOUNT + " INTEGER)");
-		// DB Expense
-				db.execSQL("CREATE TABLE "+ TABLE_EXP + " (" +
-						EXP_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-						EXP_CATEGORY + " TEXT, " +
-						EXP_ICON + " TEXT, " + 
-						EXP_TITLE + " TEXT, " + 
-						EXP_AMOUNT + " TEXT, " + 
-						EXP_HOW_OFTEN + " TEXT, " +
-						EXP_DATE + " TEXT, " +	
-						STAT + " INTEGER, " +
-						EXP_ACCOUNT + " INTEGER)");
+		// table Expense
+		db.execSQL("CREATE TABLE "+ TABLE_EXP + " (" +
+				ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+				EXP_CATEGORY + " TEXT, " +
+				EXP_ICON + " TEXT, " + 
+				EXP_TITLE + " TEXT, " + 
+				EXP_AMOUNT + " TEXT, " + 
+				EXP_HOW_OFTEN + " TEXT, " +
+				EXP_DATE + " TEXT, " +	
+				STAT + " INTEGER, " +
+				EXP_ACCOUNT + " INTEGER)");
 		
+		// Fills a currency from resources
+		fillTable(db, strArrCode, TABLE_CURR, CURR_NAME);
+		// Fills a category of account from resources
+		fillTable(db, strArrCatAcc, TABLE_CAT_ACC, CAT_ACC_NAME);
+		// Fills a category of income from resources
+		fillTable(db, strArrCatInc, TABLE_CAT_INC, CAT_INC_NAME);
+		// Fills a category of expense from resources
+		fillTable(db, strArrCatExp, TABLE_CAT_EXP, CAT_EXP_NAME);
+	}
+	
+	// Fill categories from resources
+	protected void fillTable(SQLiteDatabase db, String[] arr, String TABLE, String COLUMN) {
 		ContentValues values = new ContentValues();
-		for (int i = 0; i < strArrCode.length; i++) {
-			values.put(CURR_NAME, strArrCode[i]);
-			db.insert(TABLE_CURR, null, values);
-		}
+		for (int i = 0; i < arr.length; i++) {
+			values.put(COLUMN, arr[i]);
+			db.insert(TABLE, null, values);
+			}
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CURR);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAT_ACC);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAT_INC);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAT_EXP);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACC);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_INC);
 		
@@ -198,7 +236,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				+ ", " + ACC_ALREADY + ", " + CURR_NAME + " FROM "
 				+ TABLE_ACC + " INNER JOIN " + TABLE_CURR + " WHERE "
 				+ TABLE_ACC + "." + ACC_CURRENCY + " = " + TABLE_CURR + "."
-				+ CURR_ID;
+				+ ID;
 		Cursor accCursor = database.rawQuery(MY_QUERY, null);
 //        Cursor accCursor = database.query(TABLE_ACC, null, null, null, null, null, CATEGORY_ACC);
 		if (accCursor.moveToFirst()) {

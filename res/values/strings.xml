@@ -10,7 +10,7 @@
     
     <!-- Strings related to all content -->
     <string name="category">Категория:</string>
-    <string name="category_name">Новая категория</string>
+    <string name="category_name">Новая категория для счета</string>
     <string name="title">название</string>
     <string name="already_on_account">Уже на счету:</string>
     <string name="amount">сумма</string>
@@ -28,11 +28,9 @@
 	<string name="add_account">добавьте счет</string>
     
     <string-array name="category_account_arrays">
-        <item>Cash</item>
-        <item>Debit card</item>
-        <item>Bank Account</item>
-        <item>Deposit</item>
-        <item>Own account</item>
+        <item>Наличные</item>
+        <item>Кредитная карточка</item>
+        <item>Счет в банке</item>
     </string-array>
     
     <string-array name="category_income_arrays">
@@ -45,7 +43,6 @@
         <item>Пособие</item>
         <item>Страховые выплаты</item>
         <item>Разовые доходы</item>
-        <item>Свой доход</item>
     </string-array>
     
     <string-array name="category_expense_arrays">
@@ -64,7 +61,6 @@
         <item>Расходы на развлечение</item>
         <item>Расходы на автомобиль</item>
         <item>Расходы на одежду</item>
-        <item>Другие расходы</item>
     </string-array>
     
     <string-array name="how_often">
