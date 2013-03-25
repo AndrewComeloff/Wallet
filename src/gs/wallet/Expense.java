@@ -53,7 +53,7 @@ public class Expense extends FragmentActivity implements DatePickerDialogFragmen
 		
 		// get title of accounts from DB
 		final DBOpenHelper dbHelper = new DBOpenHelper(this);
-		arrAccount = dbHelper.selectColumn(this, DBOpenHelper.TABLE_ACC, DBOpenHelper.ACC_TITLE );	
+		arrAccount = dbHelper.getColumn(this, DBOpenHelper.TABLE_ACC, DBOpenHelper.ACC_TITLE );	
 		
 		if (arrAccount.length == 0) {
 			arrAccount = new String[1];
@@ -103,19 +103,19 @@ public class Expense extends FragmentActivity implements DatePickerDialogFragmen
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long id) {
 				// Get array with acc_id
-				String[] arrAccountID = dbHelper.selectColumn(Expense.this,
+				String[] arrAccountID = dbHelper.getColumn(Expense.this,
 						DBOpenHelper.TABLE_ACC, DBOpenHelper.ID);				
 				
 				if (arrAccountID.length > 0) {
 					// Get account ID from selected position
 					acountID = Integer.parseInt(arrAccountID[position]);
 					// Get currancy ID from selected account
-					currancyID = Integer.parseInt(dbHelper.selectCell(
+					currancyID = Integer.parseInt(dbHelper.getCell(
 							Expense.this, DBOpenHelper.TABLE_ACC,
 							DBOpenHelper.ACC_CURRENCY, DBOpenHelper.ID,
 							acountID));
 					// Set currancy
-					etCurrency.setText(dbHelper.selectCell(Expense.this,
+					etCurrency.setText(dbHelper.getCell(Expense.this,
 							DBOpenHelper.TABLE_CURR, DBOpenHelper.CURR_NAME,
 							DBOpenHelper.ID, currancyID));
 				} 
@@ -228,7 +228,7 @@ public class Expense extends FragmentActivity implements DatePickerDialogFragmen
 		float amount = Float.parseFloat(etAmountIncome.getText().toString());
 
 		DBOpenHelper dbHelper = new DBOpenHelper(this);
-		dbHelper.setExpense(category, imageName, title, amount, acountID, howOften, (pad(day) + "." + pad(month + 1) + "." + year));
+//		dbHelper.setExpense(category, imageName, title, amount, acountID, howOften, (pad(day) + "." + pad(month + 1) + "." + year));
 		
 //		Intent intent = new Intent(this, Expense.class);
 //	    startActivity(intent);

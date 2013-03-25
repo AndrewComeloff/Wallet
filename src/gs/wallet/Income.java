@@ -54,7 +54,7 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 		
 		// get title of accounts from DB
 		final DBOpenHelper dbHelper = new DBOpenHelper(this);
-		arrAccount = dbHelper.selectColumn(this, DBOpenHelper.TABLE_ACC, DBOpenHelper.ACC_TITLE );	
+		arrAccount = dbHelper.getColumn(this, DBOpenHelper.TABLE_ACC, DBOpenHelper.ACC_TITLE );	
 		
 		if (arrAccount.length == 0) {
 			arrAccount = new String[1];
@@ -104,19 +104,19 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long id) {
 				// Get array with acc_id
-				String[] arrAccountID = dbHelper.selectColumn(Income.this,
+				String[] arrAccountID = dbHelper.getColumn(Income.this,
 						DBOpenHelper.TABLE_ACC, DBOpenHelper.ID);				
 				
 				if (arrAccountID.length > 0) {
 					// Get account ID from selected position
 					acountID = Integer.parseInt(arrAccountID[position]);
 					// Get currancy ID from selected account
-					currancyID = Integer.parseInt(dbHelper.selectCell(
+					currancyID = Integer.parseInt(dbHelper.getCell(
 							Income.this, DBOpenHelper.TABLE_ACC,
 							DBOpenHelper.ACC_CURRENCY, DBOpenHelper.ID,
 							acountID));
 					// Set currancy
-					etCurrency.setText(dbHelper.selectCell(Income.this,
+					etCurrency.setText(dbHelper.getCell(Income.this,
 							DBOpenHelper.TABLE_CURR, DBOpenHelper.CURR_NAME,
 							DBOpenHelper.ID, currancyID));
 				} 
@@ -211,8 +211,8 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 	}
 	
 	public void clickSkip(View v) {
-//		DBOpenHelper dbHelper = new DBOpenHelper(this);
-//		dbHelper.rawQuery(this);
+		DBOpenHelper dbHelper = new DBOpenHelper(this);
+		dbHelper.rawQuery(this);
 		
 		// втавляем картинку по имени файла
 //		String st = "icon_01";
@@ -220,8 +220,8 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 //		int resID = res.getIdentifier(st , "drawable", getPackageName());
 //		ivIcons.setImageResource(resID);
 		
-		Intent intent = new Intent(this, Expense.class);
-	    startActivity(intent);
+//		Intent intent = new Intent(this, Expense.class);
+//	    startActivity(intent);
 	}
 	
 	public void clickAdd(View v) {
@@ -229,7 +229,7 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 		float amount = Float.parseFloat(etAmountIncome.getText().toString());
 
 		DBOpenHelper dbHelper = new DBOpenHelper(this);
-		dbHelper.setIncome(category, imageName, title, amount, acountID, howOften, (pad(day) + "." + pad(month + 1) + "." + year));
+//		dbHelper.setIncome(category, imageName, title, amount, acountID, howOften, (pad(day) + "." + pad(month + 1) + "." + year));
 		
 		Intent intent = new Intent(this, Expense.class);
 	    startActivity(intent);

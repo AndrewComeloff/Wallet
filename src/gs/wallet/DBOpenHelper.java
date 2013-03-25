@@ -18,28 +18,29 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	private static final String STAT = "stat";
 	
 	public static final String ID = "_id";
+	public static final String CATEGORY = "category";
 	
 	public static final String TABLE_CURR = "currancy";	
 	public static final String CURR_NAME = "name";
 	public static final String CURR_RATE = "rate";
 	
 	public static final String TABLE_CAT_ACC = "category_account";	
-	public static final String CAT_ACC_NAME = "name";
+//	public static final String CAT_ACC_NAME = "name";
 	
 	public static final String TABLE_CAT_INC = "category_income";	
-	public static final String CAT_INC_NAME = "name";
+//	public static final String CAT_INC_NAME = "name";
 	
 	public static final String TABLE_CAT_EXP = "category_expense";
-	public static final String CAT_EXP_NAME = "name";
+//	public static final String CAT_EXP_NAME = "name";
 	
-	public static final String TABLE_ACC = "account";
-	public static final String ACC_CATEGORY = "category";
+	public static final String TABLE_ACC = "accounts";
+	public static final String ACC_CATEGORY = "category_id";
 	public static final String ACC_TITLE = "title";
 	public static final String ACC_ALREADY = "amount";
 	public static final String ACC_CURRENCY = "currency_id";
 	
-	public static final String TABLE_INC = "income";
-	public static final String INC_CATEGORY = "category";
+	public static final String TABLE_INC = "incomes";
+	public static final String INC_CATEGORY = "category_id";
 	public static final String INC_ICON = "icon";
 	public static final String INC_TITLE = "title";
 	public static final String INC_AMOUNT = "amount";
@@ -47,8 +48,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	public static final String INC_HOW_OFTEN = "how_often";
 	public static final String INC_DATE = "date";
 	
-	public static final String TABLE_EXP = "expense";
-	public static final String EXP_CATEGORY = "category";
+	public static final String TABLE_EXP = "expenses";
+	public static final String EXP_CATEGORY = "category_id";
 	public static final String EXP_ICON = "icon";
 	public static final String EXP_TITLE = "title";
 	public static final String EXP_AMOUNT = "amount";
@@ -82,22 +83,22 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		// table Category Account
 		db.execSQL("CREATE TABLE " + TABLE_CAT_ACC + " (" +
 		        ID + " INTEGER PRIMARY KEY , " +
-		        CAT_ACC_NAME + " TEXT, " +
+		        CATEGORY + " TEXT, " +
 		        STAT + " INTEGER)");
 		// table Category Income
 		db.execSQL("CREATE TABLE " + TABLE_CAT_INC + " (" +
 		        ID + " INTEGER PRIMARY KEY , " +
-		        CAT_INC_NAME + " TEXT, " +
+		        CATEGORY + " TEXT, " +
 		        STAT + " INTEGER)");
 		// table Category Expense
 		db.execSQL("CREATE TABLE " + TABLE_CAT_EXP + " (" +
 		        ID + " INTEGER PRIMARY KEY , " +
-		        CAT_EXP_NAME + " TEXT, " +
+		        CATEGORY + " TEXT, " +
 		        STAT + " INTEGER)");
 		// table Account
 		db.execSQL("CREATE TABLE "+ TABLE_ACC + " (" +
 				ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-				ACC_CATEGORY + " TEXT, " + 
+				ACC_CATEGORY + " INTEGER, " + 
 				ACC_TITLE + " TEXT, " + 
 				ACC_ALREADY + " TEXT, " +
 				STAT + " INTEGER, " +
@@ -108,7 +109,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		// table Income
 		db.execSQL("CREATE TABLE "+ TABLE_INC + " (" +
 				ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-				INC_CATEGORY + " TEXT, " +
+				INC_CATEGORY + " INTEGER, " +
 				INC_ICON + " TEXT, " + 
 				INC_TITLE + " TEXT, " + 
 				INC_AMOUNT + " TEXT, " + 
@@ -119,7 +120,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		// table Expense
 		db.execSQL("CREATE TABLE "+ TABLE_EXP + " (" +
 				ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-				EXP_CATEGORY + " TEXT, " +
+				EXP_CATEGORY + " INTEGER, " +
 				EXP_ICON + " TEXT, " + 
 				EXP_TITLE + " TEXT, " + 
 				EXP_AMOUNT + " TEXT, " + 
@@ -131,11 +132,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		// Fills a currency from resources
 		fillTable(db, strArrCode, TABLE_CURR, CURR_NAME);
 		// Fills a category of account from resources
-		fillTable(db, strArrCatAcc, TABLE_CAT_ACC, CAT_ACC_NAME);
+		fillTable(db, strArrCatAcc, TABLE_CAT_ACC, CATEGORY);
 		// Fills a category of income from resources
-		fillTable(db, strArrCatInc, TABLE_CAT_INC, CAT_INC_NAME);
+		fillTable(db, strArrCatInc, TABLE_CAT_INC, CATEGORY);
 		// Fills a category of expense from resources
-		fillTable(db, strArrCatExp, TABLE_CAT_EXP, CAT_EXP_NAME);
+		fillTable(db, strArrCatExp, TABLE_CAT_EXP, CATEGORY);
 	}
 	
 	// Fill categories from resources
@@ -143,6 +144,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		for (int i = 0; i < arr.length; i++) {
 			values.put(COLUMN, arr[i]);
+			values.put(STAT, 1);
 			db.insert(TABLE, null, values);
 			}
 	}
@@ -160,18 +162,26 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
+	public void setCategory(String TABLE, String newCategory) {
+		openDB();
+		ContentValues values = new ContentValues();
+		values.put(CATEGORY, newCategory);
+		values.put(STAT, 1);
+		database.insert(TABLE, null, values);
+		database.close();
+	}
 	
 	/**
 	 * Add account with parameters to the database
-	 * @param category
+	 * @param categoryID
 	 * @param title
 	 * @param alreadyOnAccount
 	 * @param currConst
 	 */
-	public void setAccount(String category, String title, float alreadyOnAccount,	int currConst) {
+	public void setAccount(int categoryID, String title, float alreadyOnAccount,	int currConst) {
 		openDB();
 		ContentValues values = new ContentValues();
-		values.put(ACC_CATEGORY, category);
+		values.put(ACC_CATEGORY, categoryID);
 		values.put(ACC_TITLE, title);
 		values.put(ACC_ALREADY, alreadyOnAccount);
 		values.put(ACC_CURRENCY, currConst);
@@ -182,22 +192,22 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	
 	/**
 	 * Add income with parameters to the database
-	 * @param category
+	 * @param categoryID
 	 * @param title
 	 * @param amount 
-	 * @param account Number of account
+	 * @param accountID Number of account
 	 * @param howOften Index from array
 	 * @param date 
 	 */
-	public void setIncome(String category, String icon, String title, 
-			Float amount, int account_id, int howOften, String date) {
+	public void setIncome(int categoryID, String icon, String title, 
+			Float amount, int accountID, int howOften, String date) {
 		openDB();
 		ContentValues values = new ContentValues();
-		values.put(INC_CATEGORY, category);
+		values.put(INC_CATEGORY, categoryID);
 		values.put(INC_ICON, icon);
 		values.put(INC_TITLE, title);
 		values.put(INC_AMOUNT, amount);
-		values.put(INC_ACCOUNT, account_id);
+		values.put(INC_ACCOUNT, accountID);
 		values.put(INC_HOW_OFTEN, howOften);
 		values.put(INC_DATE, date);
 		values.put(STAT, 1);
@@ -207,22 +217,22 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	
 	/**
 	 * Add expense with parameters to the database
-	 * @param category
+	 * @param categoryID
 	 * @param title
 	 * @param amount 
-	 * @param account Number of account
+	 * @param accountID Number of account
 	 * @param howOften Index from array
 	 * @param date 
 	 */
-	public void setExpense(String category, String icon, String title, 
-			Float amount, int account_id, int howOften, String date) {
+	public void setExpense(int categoryID, String icon, String title, 
+			Float amount, int accountID, int howOften, String date) {
 		openDB();
 		ContentValues values = new ContentValues();
-		values.put(EXP_CATEGORY, category);
+		values.put(EXP_CATEGORY, categoryID);
 		values.put(EXP_ICON, icon);
 		values.put(EXP_TITLE, title);
 		values.put(EXP_AMOUNT, amount);
-		values.put(EXP_ACCOUNT, account_id);
+		values.put(EXP_ACCOUNT, accountID);
 		values.put(EXP_HOW_OFTEN, howOften);
 		values.put(EXP_DATE, date);
 		values.put(STAT, 1);
@@ -232,18 +242,24 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	
 	public void rawQuery(Context ctx) {
         openDB();
-		final String MY_QUERY = "SELECT " + ACC_CATEGORY + ", " + ACC_TITLE
-				+ ", " + ACC_ALREADY + ", " + CURR_NAME + " FROM "
-				+ TABLE_ACC + " INNER JOIN " + TABLE_CURR + " WHERE "
-				+ TABLE_ACC + "." + ACC_CURRENCY + " = " + TABLE_CURR + "."
-				+ ID;
+//		final String MY_QUERY = "SELECT " + ACC_CATEGORY + ", " + ACC_TITLE
+//				+ ", " + ACC_ALREADY + ", " + CURR_NAME + " FROM "
+//				+ TABLE_ACC + " INNER JOIN " + TABLE_CURR + " WHERE "
+//				+ TABLE_ACC + "." + ACC_CURRENCY + " = " + TABLE_CURR + "."
+//				+ ID;
+        final String MY_QUERY = "SELECT " + CATEGORY + ", " + ACC_TITLE
+				+ ", " + ACC_ALREADY + ", " + CURR_NAME + 
+				" FROM " +  TABLE_ACC +
+				" LEFT JOIN " + TABLE_CURR + " ON " + TABLE_ACC + "." + ACC_CURRENCY + " = " + TABLE_CURR + "." + ID +
+				" LEFT JOIN " + TABLE_CAT_ACC + " ON " + TABLE_ACC + "." + ACC_CATEGORY + " = " + TABLE_CAT_ACC + "." + ID;
+//        final String MY_QUERY = "SELECT category, title, amount, name FROM account INNER JOIN currancy AND category_account WHERE account.currency_id = currancy._id AND account.category_id = category_account._id";
 		Cursor accCursor = database.rawQuery(MY_QUERY, null);
 //        Cursor accCursor = database.query(TABLE_ACC, null, null, null, null, null, CATEGORY_ACC);
 		if (accCursor.moveToFirst()) {
 
 			// определяем номера столбцов по имени в выборке
 //			int idColIndex = accCursor.getColumnIndex(ACC_ID);
-			int categoryColIndex = accCursor.getColumnIndex(ACC_CATEGORY);
+			int categoryColIndex = accCursor.getColumnIndex(CATEGORY);
 			int titleColIndex = accCursor.getColumnIndex(ACC_TITLE);
 			int alreadyColIndex = accCursor.getColumnIndex(ACC_ALREADY);
 			int currColIndex = accCursor.getColumnIndex(CURR_NAME);
@@ -281,7 +297,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	 * @param column
 	 * @return String array
 	 */
-	public String[] selectColumn(Context context, String table, String column) {
+	public String[] getColumn(Context context, String table, String column) {
         openDB();
 		final String MY_QUERY = "SELECT " + column + " FROM " + table + " WHERE " + STAT + " = 1" ;
 		Cursor accCursor = database.rawQuery(MY_QUERY, null);
@@ -311,7 +327,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	 * @param position from column _id
 	 * @return String
 	 */
-	public String selectCell(Context context, String table, String column, 
+	public String getCell(Context context, String table, String column, 
 			String _id, int position) {		
         openDB();
         
@@ -354,6 +370,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	public int deleteDB(){
 		openDB();
 		database.delete(TABLE_INC, null, null);
+		database.delete(TABLE_EXP, null, null);
+		database.delete(TABLE_CAT_ACC, null, null);
+		database.delete(TABLE_CAT_INC, null, null);
+		database.delete(TABLE_CAT_EXP, null, null);
 		return database.delete(TABLE_ACC, null, null);
 	}
 }
