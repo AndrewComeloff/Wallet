@@ -1,7 +1,7 @@
 package gs.wallet;
 
-import gs.wallet.CategoryDialogFragment.DialogListener;
-import android.R.integer;
+import gs.wallet.DialogCategory.DialogListener;
+import gs.wallet.DialogCategoryEdit.DialogEditListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Account extends FragmentActivity implements DialogListener {
+public class Account extends FragmentActivity implements DialogListener, DialogEditListener {
 	
 	Spinner spinCategory, spinCurrancy;
 	EditText etTitle, etAlreadyOnAcc;
@@ -109,7 +109,7 @@ public class Account extends FragmentActivity implements DialogListener {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long id) {
-//				category = spinCategory.getSelectedItem().toString();
+				category = spinCategory.getSelectedItem().toString();
 				posSpin = position;
 				
 				dlgCategory(position);				
@@ -123,29 +123,45 @@ public class Account extends FragmentActivity implements DialogListener {
 		});
 	}
 
-	CategoryDialogFragment dlg = new CategoryDialogFragment();
+	DialogCategory dlgCat = new DialogCategory();
 	public void dlgCategory(int position){
 		if (arrCategory.length-1 == position) {			
-		    dlg.show(getSupportFragmentManager(), "CategoryDialogFragment");
+		    dlgCat.show(getSupportFragmentManager(), "DialogCategory");
 		}		
-	}
+	}		
 	
 	public void clickDlgAdd(View v) {
-		category = dlg.getCategory();
+		category = dlgCat.getCategory();
 		// open DB and set new category
         DBOpenHelper dbHelper = new DBOpenHelper(this);
         dbHelper.setCategory(DBOpenHelper.TABLE_CAT_ACC, category);
 		
 		Toast.makeText(getBaseContext(), "press ADD - " + category, Toast.LENGTH_SHORT).show();
-		dlg.dismiss();
+		dlgCat.dismiss();
 		posSpin = arrCategory.length-1;
 		spinCategory(posSpin);
 	}
-	public void clickDlgCancel(View v) {		
+	public void clickDlgCancel(View v) {
 		Toast.makeText(getBaseContext(), "press Cancel - " + category, Toast.LENGTH_SHORT).show();
-		dlg.dismiss();
-		spinCategory(posSpin);
-	}	
+		dlgCat.dismiss();
+		spinCategory(0);
+	}
+	
+	DialogCategoryEdit dlgCatEdit = new DialogCategoryEdit();
+	public void clickEditCategory(View v) {	
+		dlgCatEdit.setCategoryEdit(category);
+		dlgCatEdit.show(getSupportFragmentManager(), "DialogCategoryEdit");
+		Toast.makeText(getBaseContext(), "press edit category", Toast.LENGTH_SHORT).show();
+	}
+	
+	public void clickDlgDel(View v) {
+		Toast.makeText(getBaseContext(), "deleted category " + category, Toast.LENGTH_SHORT).show();
+		dlgCatEdit.dismiss();
+	}
+	public void clickDlgChange(View v) {		
+		Toast.makeText(getBaseContext(), "changed category " + category, Toast.LENGTH_SHORT).show();
+		dlgCatEdit.dismiss();
+	}
 	
 	public void clickSkip(View v) {		
         Intent intent = new Intent(this, Income.class);

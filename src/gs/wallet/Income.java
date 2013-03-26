@@ -159,7 +159,7 @@ public class Income extends FragmentActivity implements DatePickerDialogFragment
 //		}
 	}
 	
-	GridIconsDialogFragment dlg = new GridIconsDialogFragment();
+	DialogGridIcons dlg = new DialogGridIcons();
 	
 	public void clickIcons(View v) {
 		dlg.show(getSupportFragmentManager(), "GridIconsDialogFragment");

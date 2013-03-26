@@ -10,7 +10,8 @@
     
     <!-- Strings related to all content -->
     <string name="category">Категория:</string>
-    <string name="category_name">Новая категория для счета</string>
+    <string name="category_name">Новая категория</string>
+    <string name="category_edit">Изменить категорию</string>
     <string name="title">название</string>
     <string name="already_on_account">Уже на счету:</string>
     <string name="amount">сумма</string>
@@ -23,6 +24,8 @@
     <string name="ok">oк</string>
 	<string name="cancel">отмена</string>
 	<string name="add">добавить</string>
+	<string name="del">удалить</string>
+	<string name="change">изменить</string>
 	<string name="skip">пропустить</string>
 	<string name="choise_icon">Выберите иконку</string>
 	<string name="add_account">добавьте счет</string>

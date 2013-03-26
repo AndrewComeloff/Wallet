@@ -20,7 +20,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	public static final String ID = "_id";
 	public static final String CATEGORY = "category";
 	
-	public static final String TABLE_CURR = "currancy";	
+	public static final String TABLE_CURR = "currency";	
 	public static final String CURR_NAME = "name";
 	public static final String CURR_RATE = "rate";
 	
@@ -130,7 +130,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				EXP_ACCOUNT + " INTEGER)");
 		
 		// Fills a currency from resources
-		fillTable(db, strArrCode, TABLE_CURR, CURR_NAME);
+		ContentValues values = new ContentValues();
+		for (int i = 0; i < strArrCode.length; i++) {
+			values.put(CURR_NAME, strArrCode[i]);
+			db.insert(TABLE_CURR, null, values);
+			}
 		// Fills a category of account from resources
 		fillTable(db, strArrCatAcc, TABLE_CAT_ACC, CATEGORY);
 		// Fills a category of income from resources

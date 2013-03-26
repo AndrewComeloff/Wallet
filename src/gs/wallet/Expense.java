@@ -158,7 +158,7 @@ public class Expense extends FragmentActivity implements DatePickerDialogFragmen
 //		}
 	}
 	
-	GridIconsDialogFragment dlg = new GridIconsDialogFragment();
+	DialogGridIcons dlg = new DialogGridIcons();
 	
 	public void clickIcons(View v) {
 		dlg.show(getSupportFragmentManager(), "GridIconsDialogFragment");
