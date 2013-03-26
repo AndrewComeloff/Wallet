@@ -15,7 +15,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	private static final String DB_NAME = "walletDB";
 	private static final int DB_VERSION = 1;
 	
-	private static final String STAT = "stat";
+//	private static final String STAT = "stat";
 	
 	public static final String ID = "_id";
 	public static final String CATEGORY = "category";
@@ -83,25 +83,21 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		// table Category Account
 		db.execSQL("CREATE TABLE " + TABLE_CAT_ACC + " (" +
 		        ID + " INTEGER PRIMARY KEY , " +
-		        CATEGORY + " TEXT, " +
-		        STAT + " INTEGER)");
+		        CATEGORY + " TEXT)");
 		// table Category Income
 		db.execSQL("CREATE TABLE " + TABLE_CAT_INC + " (" +
 		        ID + " INTEGER PRIMARY KEY , " +
-		        CATEGORY + " TEXT, " +
-		        STAT + " INTEGER)");
+		        CATEGORY + " TEXT)");
 		// table Category Expense
 		db.execSQL("CREATE TABLE " + TABLE_CAT_EXP + " (" +
 		        ID + " INTEGER PRIMARY KEY , " +
-		        CATEGORY + " TEXT, " +
-		        STAT + " INTEGER)");
+		        CATEGORY + " TEXT)");
 		// table Account
 		db.execSQL("CREATE TABLE "+ TABLE_ACC + " (" +
 				ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				ACC_CATEGORY + " INTEGER, " + 
 				ACC_TITLE + " TEXT, " + 
 				ACC_ALREADY + " TEXT, " +
-				STAT + " INTEGER, " +
 				ACC_CURRENCY + " INTEGER)");
 //				ACC_CURRENCY + " INTEGER NOT NULL ,FOREIGN KEY (" + 
 //				ACC_CURRENCY + ") REFERENCES " +
@@ -114,8 +110,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				INC_TITLE + " TEXT, " + 
 				INC_AMOUNT + " TEXT, " + 
 				INC_HOW_OFTEN + " TEXT, " +
-				INC_DATE + " TEXT, " +	
-				STAT + " INTEGER, " +
+				INC_DATE + " TEXT, " +
 				INC_ACCOUNT + " INTEGER)");
 		// table Expense
 		db.execSQL("CREATE TABLE "+ TABLE_EXP + " (" +
@@ -125,8 +120,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				EXP_TITLE + " TEXT, " + 
 				EXP_AMOUNT + " TEXT, " + 
 				EXP_HOW_OFTEN + " TEXT, " +
-				EXP_DATE + " TEXT, " +	
-				STAT + " INTEGER, " +
+				EXP_DATE + " TEXT, " +
 				EXP_ACCOUNT + " INTEGER)");
 		
 		// Fills a currency from resources
@@ -148,7 +142,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		for (int i = 0; i < arr.length; i++) {
 			values.put(COLUMN, arr[i]);
-			values.put(STAT, 1);
+//			values.put(STAT, 1);
 			db.insert(TABLE, null, values);
 			}
 	}
@@ -170,7 +164,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		openDB();
 		ContentValues values = new ContentValues();
 		values.put(CATEGORY, newCategory);
-		values.put(STAT, 1);
+//		values.put(STAT, 1);
 		database.insert(TABLE, null, values);
 		database.close();
 	}
@@ -189,7 +183,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		values.put(ACC_TITLE, title);
 		values.put(ACC_ALREADY, alreadyOnAccount);
 		values.put(ACC_CURRENCY, currConst);
-		values.put(STAT, 1);
+//		values.put(STAT, 1);
 		database.insert(TABLE_ACC, null, values);
 		database.close();
 	}
@@ -214,7 +208,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		values.put(INC_ACCOUNT, accountID);
 		values.put(INC_HOW_OFTEN, howOften);
 		values.put(INC_DATE, date);
-		values.put(STAT, 1);
+//		values.put(STAT, 1);
 		database.insert(TABLE_INC, null, values);
 		database.close();
 	}
@@ -239,7 +233,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		values.put(EXP_ACCOUNT, accountID);
 		values.put(EXP_HOW_OFTEN, howOften);
 		values.put(EXP_DATE, date);
-		values.put(STAT, 1);
+//		values.put(STAT, 1);
 		database.insert(TABLE_EXP, null, values);
 		database.close();
 	}
@@ -303,7 +297,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	 */
 	public String[] getColumn(Context context, String table, String column) {
         openDB();
-		final String MY_QUERY = "SELECT " + column + " FROM " + table + " WHERE " + STAT + " = 1" ;
+		final String MY_QUERY = "SELECT " + column + " FROM " + table;
 		Cursor accCursor = database.rawQuery(MY_QUERY, null);
 		String[] array = new String[accCursor.getCount()];
 		if (accCursor.moveToFirst()) {
@@ -370,6 +364,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //            if (cur != null) cur.close(); 
 //        } 
 //    } 
+	
+	public boolean deleteRow(String TABLE, int id) 
+	{
+		openDB();
+	    return database.delete(TABLE, ID + "=" + id, null) > 0;
+	}
 	
 	public int deleteDB(){
 		openDB();

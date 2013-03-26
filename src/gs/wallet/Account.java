@@ -132,14 +132,19 @@ public class Account extends FragmentActivity implements DialogListener, DialogE
 	
 	public void clickDlgAdd(View v) {
 		category = dlgCat.getCategory();
-		// open DB and set new category
-        DBOpenHelper dbHelper = new DBOpenHelper(this);
-        dbHelper.setCategory(DBOpenHelper.TABLE_CAT_ACC, category);
+		if (!category.equals("")) {
+			// open DB and set new category
+	        DBOpenHelper dbHelper = new DBOpenHelper(this);
+	        dbHelper.setCategory(DBOpenHelper.TABLE_CAT_ACC, category);
+			
+			Toast.makeText(getBaseContext(), "press ADD - " + category, Toast.LENGTH_SHORT).show();
+			dlgCat.dismiss();
+			posSpin = arrCategory.length-1;
+			spinCategory(posSpin);
+		} else {
+			Toast.makeText(getBaseContext(), "please input name a new category", Toast.LENGTH_SHORT).show();
+		}
 		
-		Toast.makeText(getBaseContext(), "press ADD - " + category, Toast.LENGTH_SHORT).show();
-		dlgCat.dismiss();
-		posSpin = arrCategory.length-1;
-		spinCategory(posSpin);
 	}
 	public void clickDlgCancel(View v) {
 		Toast.makeText(getBaseContext(), "press Cancel - " + category, Toast.LENGTH_SHORT).show();
@@ -155,12 +160,17 @@ public class Account extends FragmentActivity implements DialogListener, DialogE
 	}
 	
 	public void clickDlgDel(View v) {
+		DBOpenHelper dbHelper = new DBOpenHelper(this);
+		String[] arrCategoryID = dbHelper.getColumn(this, DBOpenHelper.TABLE_CAT_ACC, DBOpenHelper.ID);
+		dbHelper.deleteRow(DBOpenHelper.TABLE_CAT_ACC, Integer.parseInt(arrCategoryID[posSpin]));
 		Toast.makeText(getBaseContext(), "deleted category " + category, Toast.LENGTH_SHORT).show();
 		dlgCatEdit.dismiss();
+		spinCategory(posSpin-1);
 	}
 	public void clickDlgChange(View v) {		
 		Toast.makeText(getBaseContext(), "changed category " + category, Toast.LENGTH_SHORT).show();
 		dlgCatEdit.dismiss();
+		spinCategory(posSpin);
 	}
 	
 	public void clickSkip(View v) {		

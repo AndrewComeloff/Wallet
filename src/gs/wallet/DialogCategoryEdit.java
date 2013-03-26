@@ -32,6 +32,7 @@ public class DialogCategoryEdit extends DialogFragment {
 
 		etCategory = (EditText) v.findViewById(R.id.etCategory);
 		etCategory.setText(category);
+		etCategory.setSelection(category.length());
 
 		return builder.create();
 	}
