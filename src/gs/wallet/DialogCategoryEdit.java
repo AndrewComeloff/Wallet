@@ -37,12 +37,12 @@ public class DialogCategoryEdit extends DialogFragment {
 		return builder.create();
 	}
 
-	public void setCategoryEdit(String category) {
+	public void setCategory(String category) {
 		this.category = category;
 		return;
 	}
 	
-	public String getCategoryEdit() {
+	public String getCategory() {
 		category = etCategory.getText().toString();
 		return category;
 	}

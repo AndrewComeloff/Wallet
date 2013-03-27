@@ -1,5 +1,6 @@
 package gs.wallet;
 
+import gs.wallet.R.string;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
@@ -67,7 +68,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		super(context, DB_NAME, null, DB_VERSION);
 //		this.context = context;
 		Resources res = context.getResources();
-		strArrCode = res.getStringArray(R.array.code_currancy_arrays);
+		strArrCode = res.getStringArray(R.array.code_currency_arrays);
 		strArrCatAcc = res.getStringArray(R.array.category_account_arrays);
 		strArrCatInc = res.getStringArray(R.array.category_income_arrays);
 		strArrCatExp = res.getStringArray(R.array.category_expense_arrays);
@@ -75,7 +76,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {		
-		// table Currancy
+		// table Currency
 		db.execSQL("CREATE TABLE " + TABLE_CURR + " (" +
 		        ID + " INTEGER PRIMARY KEY , " +
 		        CURR_NAME + " TEXT, " +
@@ -199,6 +200,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	 */
 	public void setIncome(int categoryID, String icon, String title, 
 			Float amount, int accountID, int howOften, String date) {
+		if (amount == null) {
+			amount = 0f;
+		}
 		openDB();
 		ContentValues values = new ContentValues();
 		values.put(INC_CATEGORY, categoryID);
@@ -250,7 +254,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				" FROM " +  TABLE_ACC +
 				" LEFT JOIN " + TABLE_CURR + " ON " + TABLE_ACC + "." + ACC_CURRENCY + " = " + TABLE_CURR + "." + ID +
 				" LEFT JOIN " + TABLE_CAT_ACC + " ON " + TABLE_ACC + "." + ACC_CATEGORY + " = " + TABLE_CAT_ACC + "." + ID;
-//        final String MY_QUERY = "SELECT category, title, amount, name FROM account INNER JOIN currancy AND category_account WHERE account.currency_id = currancy._id AND account.category_id = category_account._id";
+//        final String MY_QUERY = "SELECT category, title, amount, name FROM account INNER JOIN currency AND category_account WHERE account.currency_id = currency._id AND account.category_id = category_account._id";
 		Cursor accCursor = database.rawQuery(MY_QUERY, null);
 //        Cursor accCursor = database.query(TABLE_ACC, null, null, null, null, null, CATEGORY_ACC);
 		if (accCursor.moveToFirst()) {
@@ -321,16 +325,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	 * @param context
 	 * @param table Name of table (constant)
 	 * @param column column from get information (constant)
-	 * @param _id column id(constant)
-	 * @param position from column _id
+	 * @param id position from column
 	 * @return String
 	 */
-	public String getCell(Context context, String table, String column, 
-			String _id, int position) {		
+	public String getCell(Context context, String table, String column, int id) {		
         openDB();
         
 		final String MY_QUERY = "SELECT " + column + " FROM " + table 
-				+ " WHERE " + _id + " = " + position ;
+				+ " WHERE " + ID + " = " + id ;
 		Cursor accCursor = database.rawQuery(MY_QUERY, null);
 		String str = null;
 		if (accCursor.moveToFirst()) {
@@ -353,22 +355,28 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		}
 	}
 	
-//	public boolean isTableExist(String tableName){ 
-//        Cursor cur = null; 
-//        try{ 
-//            cur = database.rawQuery("SELECT * FROM " + tableName + " WHERE 1=0", null ); 
-//            return true; 
-//        }catch(Exception ex){ 
-//            return false; 
-//        }finally{ 
-//            if (cur != null) cur.close(); 
-//        } 
-//    } 
+	boolean isTableExists(Context context, String TABLE)
+	{
+		openDB();
+		String[] str = getColumn(context, TABLE, ID);
+		database.close();
+		return str.length > 0;
+	}
+	
+	public boolean editCell(String TABLE, String COLUMN, int id, String value){
+		openDB();
+		ContentValues args = new ContentValues();
+	    args.put(COLUMN, value);
+	    boolean bl = database.update(TABLE, args, ID + "=" + id, null) > 0;
+	    return bl;
+	}
 	
 	public boolean deleteRow(String TABLE, int id) 
 	{
 		openDB();
-	    return database.delete(TABLE, ID + "=" + id, null) > 0;
+		boolean bl = database.delete(TABLE, ID + "=" + id, null) > 0;
+		database.close();
+	    return bl;
 	}
 	
 	public int deleteDB(){

@@ -30,9 +30,16 @@ public class SplashScreen extends Activity {
                 finish();
                  
                 if (!mIsBackButtonPressed) {
-                    // start the home screen if the back button wasn't pressed already 
-                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                    SplashScreen.this.startActivity(intent);
+                	DBOpenHelper dbHelper = new DBOpenHelper(SplashScreen.this);
+                	boolean tableExist = dbHelper.isTableExists(null, DBOpenHelper.TABLE_ACC);
+                	if (tableExist) {
+                		// start the home screen if the back button wasn't pressed already 
+                        Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                        SplashScreen.this.startActivity(intent);
+					} else {
+						Intent intent = new Intent(SplashScreen.this, Account.class);
+	                    SplashScreen.this.startActivity(intent);
+					}
                }
                  
             }

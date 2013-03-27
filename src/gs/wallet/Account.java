@@ -3,6 +3,7 @@ package gs.wallet;
 import gs.wallet.DialogCategory.DialogListener;
 import gs.wallet.DialogCategoryEdit.DialogEditListener;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -15,15 +16,16 @@ import android.widget.Toast;
 
 public class Account extends FragmentActivity implements DialogListener, DialogEditListener {
 	
-	Spinner spinCategory, spinCurrancy;
+	Spinner spinCategory, spinCurrency;
 	EditText etTitle, etAlreadyOnAcc;
 	
 	String category, title;
 	
-	int currancy; 
-	int posSpin = 0;
+	int currency; 
+	int posSpinCat = 0;
 	int[] arrCurrNum;
 	String[] arrCategory;
+	Resources res = getResources();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +33,17 @@ public class Account extends FragmentActivity implements DialogListener, DialogE
 		setContentView(R.layout.account);
 
 		spinCategory = (Spinner) findViewById(R.id.spinCategoryAccount);
-		spinCurrancy = (Spinner) findViewById(R.id.spinCurrencyAccount);
+		spinCurrency = (Spinner) findViewById(R.id.spinCurrencyAccount);
 		etTitle = (EditText)findViewById(R.id.etTitleAccount);
 		etAlreadyOnAcc = (EditText)findViewById(R.id.etAlreadyOnAccount);
+		
+		
 		
 //		// get category of accounts from DB
 //		final DBOpenHelper dbHelper = new DBOpenHelper(this);
 //		arrCategory = dbHelper.selectColumn(this, DBOpenHelper.TABLE_CAT_ACC, DBOpenHelper.CAT_ACC_NAME);		
 		
-		spinCategory(posSpin);
+		spinCategory(posSpinCat);
 		
 
 //		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -66,17 +70,18 @@ public class Account extends FragmentActivity implements DialogListener, DialogE
 //			
 //		});
 		
+		// -- spin Currency --
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.currancy_arrays,
+				this, R.array.currency_arrays,
 				android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinCurrancy.setAdapter(adapter);
-		spinCurrancy.setOnItemSelectedListener(new OnItemSelectedListener() {
+		spinCurrency.setAdapter(adapter);
+		spinCurrency.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long id) {
-				currancy = position+1;
+				currency = position+1;
 			}
 
 			@Override
@@ -110,7 +115,7 @@ public class Account extends FragmentActivity implements DialogListener, DialogE
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long id) {
 				category = spinCategory.getSelectedItem().toString();
-				posSpin = position;
+				posSpinCat = position;
 				
 				dlgCategory(position);				
 			}
@@ -139,10 +144,10 @@ public class Account extends FragmentActivity implements DialogListener, DialogE
 			
 			Toast.makeText(getBaseContext(), "press ADD - " + category, Toast.LENGTH_SHORT).show();
 			dlgCat.dismiss();
-			posSpin = arrCategory.length-1;
-			spinCategory(posSpin);
+			posSpinCat = arrCategory.length-1;
+			spinCategory(posSpinCat);
 		} else {
-			Toast.makeText(getBaseContext(), "please input name a new category", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getBaseContext(), res.getString(R.string.add_name), Toast.LENGTH_SHORT).show();
 		}
 		
 	}
@@ -154,7 +159,7 @@ public class Account extends FragmentActivity implements DialogListener, DialogE
 	
 	DialogCategoryEdit dlgCatEdit = new DialogCategoryEdit();
 	public void clickEditCategory(View v) {	
-		dlgCatEdit.setCategoryEdit(category);
+		dlgCatEdit.setCategory(category);
 		dlgCatEdit.show(getSupportFragmentManager(), "DialogCategoryEdit");
 		Toast.makeText(getBaseContext(), "press edit category", Toast.LENGTH_SHORT).show();
 	}
@@ -162,33 +167,45 @@ public class Account extends FragmentActivity implements DialogListener, DialogE
 	public void clickDlgDel(View v) {
 		DBOpenHelper dbHelper = new DBOpenHelper(this);
 		String[] arrCategoryID = dbHelper.getColumn(this, DBOpenHelper.TABLE_CAT_ACC, DBOpenHelper.ID);
-		dbHelper.deleteRow(DBOpenHelper.TABLE_CAT_ACC, Integer.parseInt(arrCategoryID[posSpin]));
+		dbHelper.deleteRow(DBOpenHelper.TABLE_CAT_ACC, Integer.parseInt(arrCategoryID[posSpinCat]));
 		Toast.makeText(getBaseContext(), "deleted category " + category, Toast.LENGTH_SHORT).show();
 		dlgCatEdit.dismiss();
-		spinCategory(posSpin-1);
+		spinCategory(posSpinCat-1);
 	}
-	public void clickDlgChange(View v) {		
-		Toast.makeText(getBaseContext(), "changed category " + category, Toast.LENGTH_SHORT).show();
-		dlgCatEdit.dismiss();
-		spinCategory(posSpin);
+	public void clickDlgChange(View v) {
+		category = dlgCatEdit.getCategory();
+		if (!category.equals("")) {
+			DBOpenHelper dbHelper = new DBOpenHelper(this);
+			String[] arrCategoryID = dbHelper.getColumn(this, DBOpenHelper.TABLE_CAT_ACC, DBOpenHelper.ID);
+			dbHelper.editCell(DBOpenHelper.TABLE_CAT_ACC, DBOpenHelper.CATEGORY, 
+					Integer.parseInt(arrCategoryID[posSpinCat]), category);
+			dlgCatEdit.dismiss();
+			spinCategory(posSpinCat);
+		}else {
+			Toast.makeText(getBaseContext(), res.getString(R.string.add_name), Toast.LENGTH_SHORT).show();
+		}		
 	}
 	
-	public void clickSkip(View v) {		
+	public void clickSkip(View v) {
         Intent intent = new Intent(this, Income.class);
 	      startActivity(intent);
 	}
 	public void clickAdd(View v) {
 		title = etTitle.getText().toString();
-		float alreadyOnAcc = Float.parseFloat(etAlreadyOnAcc.getText().toString());
+		String strAlreadyOnAcc = etAlreadyOnAcc.getText().toString();
+		if (strAlreadyOnAcc.equals("")) {
+			strAlreadyOnAcc = "0";
+		}
+		float alreadyOnAcc = Float.parseFloat(strAlreadyOnAcc);
 		
 		// open DB
         DBOpenHelper dbHelper = new DBOpenHelper(this);
         String[] arrCategoryID = dbHelper.getColumn(this, DBOpenHelper.TABLE_CAT_ACC, DBOpenHelper.ID);
-        dbHelper.setAccount(Integer.parseInt(arrCategoryID[posSpin]), title, alreadyOnAcc, currancy);
+        dbHelper.setAccount(Integer.parseInt(arrCategoryID[posSpinCat]), title, alreadyOnAcc, currency);
         dbHelper.rawQuery(this);
 		
 		Toast.makeText(getBaseContext(),
-				"Currancy = " +currancy + "\n" + alreadyOnAcc, Toast.LENGTH_SHORT).show();
+				"Currency = " +currency + "\n" + alreadyOnAcc, Toast.LENGTH_SHORT).show();
 		
 		Intent intent = new Intent(this, Income.class);
 	      startActivity(intent);

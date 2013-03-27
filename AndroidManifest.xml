@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="gs.wallet.MainActivity"
+            android:name="SplashScreen"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Account" android:windowSoftInputMode="stateHidden"></activity>"
+        <activity android:name="MainActivity"></activity><activity android:name="Account" android:windowSoftInputMode="stateHidden"></activity>"
         <activity android:name="Income" android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name="Expense" android:windowSoftInputMode="stateHidden"></activity>
+        
     </application>
 
 </manifest>

@@ -12,8 +12,8 @@ public final class R {
         public static final int category_account_arrays=0x7f060000;
         public static final int category_expense_arrays=0x7f060002;
         public static final int category_income_arrays=0x7f060001;
-        public static final int code_currancy_arrays=0x7f060005;
-        public static final int currancy_arrays=0x7f060004;
+        public static final int code_currency_arrays=0x7f060005;
+        public static final int currency_arrays=0x7f060004;
         public static final int how_often=0x7f060003;
     }
     public static final class attr {
@@ -199,6 +199,7 @@ public final class R {
         public static final int account=0x7f05000e;
         public static final int add=0x7f050013;
         public static final int add_account=0x7f050018;
+        public static final int add_name=0x7f050019;
         public static final int already_on_account=0x7f050009;
         public static final int amount=0x7f05000a;
         public static final int amount_expense=0x7f05000d;

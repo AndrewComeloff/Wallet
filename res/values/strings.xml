@@ -29,6 +29,7 @@
 	<string name="skip">пропустить</string>
 	<string name="choise_icon">Выберите иконку</string>
 	<string name="add_account">добавьте счет</string>
+	<string name="add_name">добавьте название</string>
     
     <string-array name="category_account_arrays">
         <item>Наличные</item>
@@ -75,7 +76,7 @@
         <item>Ежегодно</item>
     </string-array>
 
-    <string-array name="currancy_arrays">
+    <string-array name="currency_arrays">
         <item>Американский доллар</item>
         <item>Евро</item>
         <item>Белорусский рубль</item>
@@ -104,7 +105,7 @@
         <item>Турецкая лира</item>        
     </string-array>
     
-    <string-array name="code_currancy_arrays">
+    <string-array name="code_currency_arrays">
         <item>USD</item>
         <item>EUR</item>
         <item>BYR</item>
